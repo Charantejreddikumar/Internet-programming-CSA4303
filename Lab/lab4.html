@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Train Reservation</title>
+<style>
+body{font-family:Arial;background:#f0f2f8;margin:0;color:#27344b}
+header{background:#293c70;color:white;padding:28px;text-align:center}
+nav{background:#1c2b53;padding:15px;text-align:center}
+nav a{color:white;margin:15px;text-decoration:none}
+.container{max-width:800px;margin:25px auto;padding:15px}
+.card{background:white;padding:25px;margin:20px 0;border-radius:12px;box-shadow:0 4px 12px #d5d9e5}
+input,select,button{padding:12px;margin:8px 0;width:95%;box-sizing:border-box;border:1px solid #ccc;border-radius:6px}
+button{background:#435bb4;color:white;border:none;cursor:pointer}
+button:hover{background:#293c70}
+</style>
+</head>
+<body>
+<header>
+<h1>🚆 RailConnect</h1>
+<p>Online Train Reservation System</p>
+</header>
+<nav>
+<a href="#login">Login</a>
+<a href="#booking">Reserve</a>
+<a href="#pnr">PNR Status</a>
+<a href="#cancel">Cancel</a>
+</nav>
+<div class="container">
+<div class="card" id="login">
+<h2>Passenger Login</h2>
+<input placeholder="Username">
+<input type="password" placeholder="Password">
+<button onclick="alert('Demo login submitted')">Login</button>
+</div>
+
+<div class="card" id="booking">
+<h2>🎫 Reserve Train Ticket</h2>
+<form onsubmit="bookTrain(event)">
+<input id="name" placeholder="Passenger Name" required>
+<input id="from" placeholder="Origin Station" required>
+<input id="to" placeholder="Destination Station" required>
+<label>Journey Date</label>
+<input type="date" id="date" required>
+<select id="classType">
+<option>Sleeper</option>
+<option>AC 3 Tier</option>
+<option>AC 2 Tier</option>
+<option>First Class</option>
+</select>
+<button type="submit">Book Ticket</button>
+</form>
+<p id="result"></p>
+</div>
+
+<div class="card" id="pnr">
+<h2>Check PNR Status</h2>
+<input id="pnrInput" placeholder="Enter PNR Number">
+<button onclick="checkPNR()">Check Status</button>
+<p id="status"></p>
+</div>
+
+<div class="card" id="cancel">
+<h2>Cancel Reservation</h2>
+<input id="cancelInput" placeholder="Enter PNR Number">
+<button onclick="cancelTicket()">Cancel Ticket</button>
+<p id="cancelResult"></p>
+</div>
+</div>
+<script>
+let pnrNo="";
+function bookTrain(e){
+e.preventDefault();
+pnrNo=String(Math.floor(1000000000+Math.random()*9000000000));
+document.getElementById("result").textContent=
+"Demo booking created. PNR: "+pnrNo+
+" | Status: Pending confirmation";
+}
+function checkPNR(){
+let p=document.getElementById("pnrInput").value;
+document.getElementById("status").textContent=
+p&&p===pnrNo?"PNR: "+pnrNo+" | Pending confirmation":
+"PNR not found.";
+}
+function cancelTicket(){
+let p=document.getElementById("cancelInput").value;
+document.getElementById("cancelResult").textContent=
+p&&p===pnrNo?"Demo reservation cancelled.":"PNR not found.";
+if(p&&p===pnrNo){
+pnrNo="";
+document.getElementById("result").textContent="Reservation cancelled.";
+}
+}
+</script>
+</body>
+</html>

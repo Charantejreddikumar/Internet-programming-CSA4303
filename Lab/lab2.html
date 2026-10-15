@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hotel Booking</title>
+<style>
+body{font-family:Arial;background:#f7f3ed;margin:0;color:#40352d}
+header{background:#65452f;color:white;text-align:center;padding:30px}
+nav{background:#493122;padding:15px;text-align:center}
+nav a{color:white;margin:15px;text-decoration:none}
+.container{max-width:800px;margin:25px auto;padding:15px}
+.card{background:white;padding:25px;margin:20px 0;border-radius:12px;box-shadow:0 4px 12px #ddd}
+input,select,button{padding:12px;margin:8px 0;width:95%;box-sizing:border-box;border:1px solid #ccc;border-radius:6px}
+button{background:#a36c3e;color:white;border:none;cursor:pointer}
+button:hover{background:#704421}
+</style>
+</head>
+<body>
+<header>
+<h1>🏨 Grand Stay Hotel</h1>
+<p>Comfort, Luxury and Hospitality</p>
+</header>
+<nav>
+<a href="#register">Register</a>
+<a href="#booking">Book Room</a>
+<a href="#history">My Bookings</a>
+</nav>
+<div class="container">
+<div class="card" id="register">
+<h2>Create Account</h2>
+<input placeholder="Full Name">
+<input type="email" placeholder="Email Address">
+<input type="password" placeholder="Password">
+<button onclick="alert('Demo registration submitted')">Register</button>
+</div>
+
+<div class="card" id="booking">
+<h2>🛏️ Book Your Room</h2>
+<form onsubmit="bookRoom(event)">
+<input id="name" placeholder="Guest Name" required>
+<label>Check-in Date</label>
+<input type="date" id="checkin" required>
+<label>Check-out Date</label>
+<input type="date" id="checkout" required>
+<label>Room Type</label>
+<select id="room">
+<option>Single - ₹1000/night</option>
+<option>Double - ₹2000/night</option>
+<option>Deluxe - ₹3000/night</option>
+<option>Suite - ₹5000/night</option>
+</select>
+<button type="submit">Check & Book</button>
+</form>
+<p id="result"></p>
+</div>
+
+<div class="card" id="history">
+<h2>Booking History</h2>
+<p id="historyText">No bookings yet.</p>
+<button onclick="cancelBooking()">Cancel Latest Booking</button>
+</div>
+</div>
+<script>
+function bookRoom(e){
+e.preventDefault();
+let a=document.getElementById("checkin").value;
+let b=document.getElementById("checkout").value;
+if(b<=a){
+document.getElementById("result").textContent=
+"Check-out must be after check-in.";
+return;
+}
+let details=document.getElementById("name").value+" | "+
+document.getElementById("room").value+" | "+a+" to "+b;
+document.getElementById("result").textContent="Booking request submitted!";
+document.getElementById("historyText").textContent=details;
+}
+function cancelBooking(){
+document.getElementById("historyText").textContent="Booking cancelled in this demo.";
+}
+</script>
+</body>
+</html>

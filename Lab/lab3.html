@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bus Ticket Booking</title>
+<style>
+body{font-family:Arial;background:#edf5f3;margin:0;color:#203c37}
+header{background:#176b58;color:white;padding:28px;text-align:center}
+nav{background:#104c40;padding:15px;text-align:center}
+nav a{color:white;margin:15px;text-decoration:none}
+.container{max-width:800px;margin:25px auto;padding:15px}
+.card{background:white;padding:25px;margin:20px 0;border-radius:12px;box-shadow:0 4px 12px #ccdcd7}
+input,select,button{padding:12px;margin:8px 0;width:95%;box-sizing:border-box;border:1px solid #ccc;border-radius:6px}
+button{background:#16856d;color:white;border:none;cursor:pointer}
+button:hover{background:#105d4d}
+</style>
+</head>
+<body>
+<header>
+<h1>🚌 EasyBus</h1>
+<p>Your journey, made simple</p>
+</header>
+<nav>
+<a href="#login">Login</a>
+<a href="#booking">Book Ticket</a>
+<a href="#cancel">Cancel Ticket</a>
+</nav>
+<div class="container">
+<div class="card" id="login">
+<h2>User Login</h2>
+<input placeholder="Username">
+<input type="password" placeholder="Password">
+<button onclick="alert('Demo login submitted')">Login</button>
+</div>
+
+<div class="card" id="booking">
+<h2>🔎 Search & Book Bus</h2>
+<form onsubmit="bookBus(event)">
+<input id="from" placeholder="From City" required>
+<input id="to" placeholder="Destination City" required>
+<label>Journey Date</label>
+<input type="date" id="date" required>
+<select id="type">
+<option>Volvo AC</option>
+<option>Sleeper Coach</option>
+<option>Normal Coach</option>
+</select>
+<button type="submit">Search & Book</button>
+</form>
+<p id="result"></p>
+</div>
+
+<div class="card" id="cancel">
+<h2>Cancel Ticket</h2>
+<input id="ticket" placeholder="Enter Ticket Number">
+<button onclick="cancelTicket()">Cancel Ticket</button>
+<p id="cancelResult"></p>
+</div>
+
+<div class="card">
+<h2>Booking Details</h2>
+<p id="details">No ticket booked yet.</p>
+</div>
+</div>
+<script>
+let ticketNo="";
+function bookBus(e){
+e.preventDefault();
+ticketNo="BUS"+Math.floor(1000+Math.random()*9000);
+document.getElementById("result").textContent="Booking request submitted!";
+document.getElementById("details").textContent=
+"Ticket: "+ticketNo+" | "+document.getElementById("from").value+
+" to "+document.getElementById("to").value+
+" | "+document.getElementById("date").value+
+" | "+document.getElementById("type").value;
+}
+function cancelTicket(){
+let t=document.getElementById("ticket").value;
+document.getElementById("cancelResult").textContent=
+t&&t===ticketNo?"Demo ticket cancelled.":"Ticket number not found.";
+if(t&&t===ticketNo){
+document.getElementById("details").textContent="Ticket cancelled.";
+ticketNo="";
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Library Management</title>
+<style>
+body{font-family:Arial;background:#eef2f7;margin:0;color:#243047}
+header{background:#173b57;color:white;padding:25px;text-align:center}
+nav{background:#245675;padding:14px;text-align:center}
+nav a{color:white;margin:15px;text-decoration:none}
+.container{max-width:850px;margin:25px auto;padding:20px}
+.card{background:white;padding:22px;margin:18px 0;border-radius:12px;box-shadow:0 3px 12px #ccd3dc}
+input,button{padding:11px;margin:6px 0;border-radius:6px;border:1px solid #ccc}
+button{background:#1976a5;color:white;border:none;cursor:pointer}
+button:hover{background:#125477}
+li{padding:7px}
+</style>
+</head>
+<body>
+<header>
+<h1>📚 Library Management System</h1>
+<p>Your gateway to knowledge</p>
+</header>
+<nav>
+<a href="#login">Login</a>
+<a href="#search">Search Books</a>
+<a href="#admin">Admin</a>
+<a href="#history">History</a>
+</nav>
+<div class="container">
+<div class="card" id="login">
+<h2>User Login</h2>
+<input placeholder="Username"><br>
+<input type="password" placeholder="Password"><br>
+<button onclick="alert('Demo login submitted')">Login</button>
+<button onclick="alert('Registration form coming soon')">Register</button>
+</div>
+
+<div class="card" id="search">
+<h2>🔍 Search Books</h2>
+<input id="searchInput" placeholder="Enter book name">
+<button onclick="searchBook()">Search</button>
+<p id="result"></p>
+<ul id="books">
+<li>Java Programming</li>
+<li>Python Basics</li>
+<li>Web Technology</li>
+</ul>
+</div>
+
+<div class="card" id="admin">
+<h2>Admin Dashboard</h2>
+<input id="newBook" placeholder="Enter new book name">
+<button onclick="addBook()">Add Book</button>
+</div>
+
+<div class="card" id="history">
+<h2>My Borrow History</h2>
+<p>Book: Java Programming</p>
+<p>Issue Date: 01-10-2026</p>
+<p>Return Date: 15-10-2026</p>
+<p>Fine: ₹0</p>
+</div>
+</div>
+<script>
+function searchBook(){
+let q=document.getElementById("searchInput").value.toLowerCase();
+let books=document.querySelectorAll("#books li"),found=false;
+books.forEach(b=>{
+if(b.textContent.toLowerCase().includes(q)&&q) found=true;
+});
+document.getElementById("result").textContent=
+!q?"Enter a book name":found?"Book found!":"Book not found";
+}
+function addBook(){
+let v=document.getElementById("newBook").value.trim();
+if(v){
+let li=document.createElement("li");
+li.textContent=v;
+document.getElementById("books").appendChild(li);
+document.getElementById("newBook").value="";
+}
+}
+</script>
+</body>
+</html>
